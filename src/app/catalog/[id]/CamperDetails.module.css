@@ -1,0 +1,79 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 64px 80px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 1. Верхній блок (Фото зліва + Інфо справа) */
+.topGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.mainImageWrapper {
+  position: relative; /* Обов'язково для fill у Image */
+  width: 100%;
+  height: 400px; /* Фіксована висота обкладинки */
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.mainInfo {
+  background-color: var(--input-background, #f7f7f7);
+  padding: 32px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Середній блок (Галерея зліва + Деталі справа) */
+.middleGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.thumbWrapper {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.detailsCard {
+  background-color: var(--input-background, #f7f7f7);
+  padding: 32px;
+  border-radius: 20px;
+}
+
+/* 3. Нижній блок (Відгуки зліва + Форма справа) */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 448px; /* Форма займає чітко 448px */
+  gap: 40px;
+  align-items: start;
+}
+
+.leftColumn {
+  width: 100%;
+}
+
+.rightColumn {
+  width: 100%;
+}

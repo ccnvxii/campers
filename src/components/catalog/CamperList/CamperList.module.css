@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.empty {
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--text-color-secondary, #475467);
+  text-align: center;
+  padding: 60px 0;
+}

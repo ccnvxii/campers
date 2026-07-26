@@ -1,0 +1,125 @@
+.card {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  background-color: #f7f7f7;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 290px;
+  height: 310px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #101828;
+  margin: 0;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 600;
+  color: #101828;
+}
+
+.subHeader {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+  font-size: 16px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #101828;
+  text-decoration: underline;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #101828;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 24px;
+  color: #475467;
+  margin: 0 0 24px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background-color: #e8ece9;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+  text-transform: capitalize;
+}
+
+.buttonWrapper {
+  margin-top: auto;
+}
+
+.showMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px;
+  background-color: #80968b; /* Оливковий колір з макету */
+  color: #ffffff;
+  border-radius: 200px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.showMoreBtn:hover {
+  background-color: #6b7f75;
+}

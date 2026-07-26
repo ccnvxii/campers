@@ -1,0 +1,29 @@
+.hero {
+  flex: 1;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url('/Images/hero.webp');
+
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    image-set(url('/Images/hero.webp') 1x, url('/Images/hero@2x.webp') 2x);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  padding: 0 64px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+  color: var(--input-background);
+}

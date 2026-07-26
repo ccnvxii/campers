@@ -1,0 +1,34 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.statusText {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-color-secondary, #475467);
+  text-align: center;
+  padding: 60px 0;
+}
+
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.loadMoreBtn {
+  min-width: 145px;
+}

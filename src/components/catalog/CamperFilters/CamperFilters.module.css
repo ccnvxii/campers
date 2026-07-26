@@ -1,0 +1,121 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.locationGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #8e929a;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.locationIcon {
+  position: absolute;
+  left: 18px;
+  color: #101828;
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  padding: 18px 18px 18px 48px;
+  background-color: #f7f7f7;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #101828;
+  outline: none;
+}
+
+.mainTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #101828;
+  margin: 0 0 24px 0;
+}
+
+.filterSection {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #8e929a;
+  margin: 0 0 16px 0;
+}
+
+.radioList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radioOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.radioInput {
+  width: 20px;
+  height: 20px;
+  accent-color: #475467;
+  cursor: pointer;
+}
+
+.radioText {
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.searchBtn {
+  width: 100%;
+  height: 56px;
+  background-color: #80968b;
+  border-radius: 200px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 56px;
+  background-color: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 200px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #101828;
+  cursor: pointer;
+}

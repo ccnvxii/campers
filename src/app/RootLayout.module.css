@@ -1,0 +1,13 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  color: var(--text-color-main);
+}
+
+.main {
+  flex: 1; /* Займає весь вільний простір між Header і Footer */
+  display: flex;
+  flex-direction: column;
+}
