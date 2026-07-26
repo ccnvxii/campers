@@ -21,6 +21,12 @@ export type GalleryItem = {
   order: number;
 };
 
+export interface Review {
+  reviewer_name: string;
+  reviewer_rating: number;
+  comment: string;
+}
+
 export type CamperListItem = {
   id: string;
   name: string;
@@ -46,4 +52,5 @@ export type CamperDetail = CamperListItem & {
   gallery: GalleryItem[];
   createdAt: string;
   updatedAt: string;
+  reviews?: Review[];
 };
