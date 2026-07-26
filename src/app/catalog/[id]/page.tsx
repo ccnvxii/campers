@@ -3,7 +3,7 @@
 import { use } from 'react';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCamperById } from '@/services/api';
+import { fetchCamperById, fetchCamperReviews } from '@/services/api';
 import Icon from '@/components/ui/Icon/Icon';
 import CamperReviewList from '@/components/camper/CamperReviewList/CamperReviewList';
 import BookingForm from '@/components/camper/BookingForm/BookingForm';
@@ -19,18 +19,24 @@ export default function CamperDetailsPage({ params }: PageProps) {
 
   const {
     data: camper,
-    isLoading,
-    isError,
+    isLoading: isCamperLoading,
+    isError: isCamperError,
   } = useQuery({
     queryKey: ['camper', id],
     queryFn: () => fetchCamperById(id),
   });
 
-  if (isLoading) {
-    return null; // Глобальний Loader перехопить стан завантаження
+  const { data: reviews = [] } = useQuery({
+    queryKey: ['camper-reviews', id],
+    queryFn: () => fetchCamperReviews(id),
+    enabled: Boolean(id),
+  });
+
+  if (isCamperLoading) {
+    return null; 
   }
 
-  if (isError || !camper) {
+  if (isCamperError || !camper) {
     return (
       <div className={styles.errorContainer}>
         <h2>Camper not found</h2>
@@ -39,23 +45,27 @@ export default function CamperDetailsPage({ params }: PageProps) {
     );
   }
 
+  const mainImageSrc =
+    camper.coverImage ||
+    camper.gallery?.[0]?.original ||
+    camper.gallery?.[0]?.thumb;
+
   return (
     <div className={styles.container}>
-      {/* 1. Верхня сітка: Головне фото та основна інформація */}
       <div className={styles.topGrid}>
-        {/* Головна обкладинка */}
-        <div className={styles.mainImageWrapper}>
-          <Image
-            src={camper.coverImage}
-            alt={camper.name}
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-            className={styles.image}
-          />
-        </div>
+        {mainImageSrc && (
+          <div className={styles.mainImageWrapper}>
+            <Image
+              src={mainImageSrc}
+              alt={camper.name || 'Camper image'}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
+              className={styles.image}
+            />
+          </div>
+        )}
 
-        {/* Заголовок, рейтинг, ціна та опис */}
         <div className={styles.mainInfo}>
           <div className={styles.headerBlock}>
             <h1 className={styles.title}>{camper.name}</h1>
@@ -76,53 +86,59 @@ export default function CamperDetailsPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* 2. Середня сітка: Маленька галерея та деталі авто */}
       <div className={styles.middleGrid}>
-        {/* Галерея зображень */}
         <div className={styles.gallery}>
-          {camper.gallery?.map((item, index) => (
-            <div key={item.id || index} className={styles.thumbWrapper}>
-              <Image
-                src={item.thumb || item.original}
-                alt={`${camper.name} photo ${index + 1}`}
-                fill
-                sizes="150px"
-                className={styles.image}
-              />
-            </div>
-          ))}
+          {camper.gallery?.map((item, index) => {
+            const thumbSrc = item.thumb || item.original;
+            if (!thumbSrc) return null;
+
+            return (
+              <div key={item.id || index} className={styles.thumbWrapper}>
+                <Image
+                  src={thumbSrc}
+                  alt={`${camper.name} photo ${index + 1}`}
+                  fill
+                  sizes="150px"
+                  className={styles.image}
+                />
+              </div>
+            );
+          })}
         </div>
 
-        {/* Специфікація Vehicle details */}
         <div className={styles.detailsCard}>
           <h2 className={styles.sectionTitle}>Vehicle details</h2>
 
-          {/* Бейджі з оснащенням */}
           <div className={styles.badges}>
-            <span className={styles.badge}>
-              <Icon name="utomatic" width={20} height={20} />
-              {camper.transmission}
-            </span>
+            {camper.transmission && (
+              <span className={styles.badge}>
+                <Icon name="utomatic" width={20} height={20} />
+                {camper.transmission}
+              </span>
+            )}
             {camper.amenities?.includes('ac') && (
               <span className={styles.badge}>AC</span>
             )}
-            <span className={styles.badge}>
-              <Icon name="petrol" width={20} height={20} />
-              {camper.engine}
-            </span>
+            {camper.engine && (
+              <span className={styles.badge}>
+                <Icon name="petrol" width={20} height={20} />
+                {camper.engine}
+              </span>
+            )}
             {camper.amenities?.includes('kitchen') && (
               <span className={styles.badge}>Kitchen</span>
             )}
             {camper.amenities?.includes('radio') && (
               <span className={styles.badge}>Radio</span>
             )}
-            <span className={styles.badge}>
-              <Icon name="alcove" width={20} height={20} />
-              {camper.form}
-            </span>
+            {camper.form && (
+              <span className={styles.badge}>
+                <Icon name="alcove" width={20} height={20} />
+                {camper.form}
+              </span>
+            )}
           </div>
 
-          {/* Таблиця характеристик */}
           <div className={styles.specsTable}>
             <div className={styles.specRow}>
               <span>Form</span>
@@ -152,10 +168,9 @@ export default function CamperDetailsPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* 3. Нижня сітка: Відгуки та Форма бронювання */}
       <div className={styles.bottomGrid}>
         <div className={styles.leftColumn}>
-          <CamperReviewList reviews={camper.reviews || []} />
+          <CamperReviewList reviews={reviews} />
         </div>
 
         <div className={styles.rightColumn}>
