@@ -1,13 +1,13 @@
 'use client';
 
 import { forwardRef, InputHTMLAttributes } from 'react';
-import Icon from '@/components/ui/Icon/Icon';
+import Icon, { IconName } from '@/components/ui/Icon/Icon';
 import styles from './Input.module.css';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
-  icon?: string;
+  icon?: IconName;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -20,14 +20,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <div
           className={`${styles.inputWrapper} ${isError ? styles.hasError : ''}`}
         >
-          {/* Floating Label під час помилки або якщо є label */}
           {label && (
             <label htmlFor={inputId} className={styles.floatingLabel}>
               {label}
             </label>
           )}
 
-          {/* Іконка зліва (якщо це, наприклад, location) */}
           {icon && (
             <Icon
               name={icon}
@@ -45,7 +43,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
 
-          {/* Знак оклику при помилці */}
           {isError && (
             <span className={styles.errorIconWrapper}>
               <Icon
@@ -58,7 +55,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
 
-        {/* Текст помилки знизу */}
         {isError && <p className={styles.errorMessage}>{error}</p>}
       </div>
     );
